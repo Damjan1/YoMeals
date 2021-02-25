@@ -1,9 +1,8 @@
 package pages;
 
-import java.io.File;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -63,6 +62,43 @@ public class ProfilePage extends BasicPage {
 		WebElement uploadImage = this.driver.findElement(By.xpath("//*[contains(@class, \"upload\")]"));
 		js.executeScript("arguments[0].click();", uploadImage);
 		uploadImage.sendKeys("E:\\Projects\\YoMeals\\img\\John Doe.jpg");
+	}
+	
+	public void removeProfileImage() {
+		WebElement removeImage = this.driver.findElement(By.className("remove"));
+		js.executeScript("arguments[0].click();", removeImage);
+	}
+	
+	public void changePersonalImformation (String firsName , String lastName , String email , String address , String phone , String zipCode , String country , String state , String city) {
+		this.getProfileFirsName().click();
+		this.getProfileFirsName().sendKeys(Keys.CONTROL + "a" + Keys.DELETE);
+		this.getProfileFirsName().sendKeys(firsName);
+		
+		this.getProfileLastName().click();
+		this.getProfileLastName().sendKeys(Keys.CONTROL + "a" + Keys.DELETE);
+		this.getProfileLastName().sendKeys(lastName);
+		
+		this.getProfileEmail().click();
+		this.getProfileEmail().sendKeys(Keys.CONTROL + "a" + Keys.DELETE);
+		this.getProfileEmail().sendKeys(email);
+		
+		this.getProfileAddress().click();
+		this.getProfileAddress().sendKeys(Keys.CONTROL + "a" + Keys.DELETE);
+		this.getProfileAddress().sendKeys(address);
+		
+		this.getProfilePhone().click();
+		this.getProfilePhone().sendKeys(Keys.CONTROL + "a" + Keys.DELETE);
+		this.getProfilePhone().sendKeys(phone);
+		
+		this.getProfileZipCode().click();
+		this.getProfileZipCode().sendKeys(Keys.CONTROL + "a" + Keys.DELETE);
+		this.getProfileZipCode().sendKeys(zipCode);
+		
+		this.getProfileCountry().selectByValue(country);
+		
+		this.getProfileState().selectByValue(state);
+		
+		this.getProfileCity().selectByValue(city);
 	}
 	
 }
