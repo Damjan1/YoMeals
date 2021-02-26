@@ -63,8 +63,7 @@ public class ProfilePage extends BasicPage {
 	}
 	
 	public WebElement getUploadImageButton() throws InterruptedException {
-		//Thread.sleep(2000);
-		return this.driver.findElement(By.xpath("//*[@id='profileInfo']/div/div[1]/div/a")); //Mora drugi lokator
+		return this.driver.findElement(By.xpath("//*[@id='profileInfo']/div/div[1]/div/a"));
 		
 	}
 	
@@ -85,25 +84,20 @@ public class ProfilePage extends BasicPage {
 	
 	public void changePersonalImformation (String firsName , String lastName , String address , String phone , String zipCode , String country , String state , String city) throws InterruptedException {
 		this.getProfileFirsName().clear();
-//		this.getProfileFirsName().sendKeys(Keys.CONTROL + "a" + Keys.DELETE);
 		this.getProfileFirsName().sendKeys(firsName);
 		
 		this.getProfileLastName().clear();
-//		this.getProfileLastName().sendKeys(Keys.CONTROL + "a" + Keys.DELETE);
 		this.getProfileLastName().sendKeys(lastName);
 		
 		
 		this.getProfileAddress().clear();
-//		this.getProfileAddress().sendKeys(Keys.CONTROL + "a" + Keys.DELETE);
 		this.getProfileAddress().sendKeys(address);
 		
 		
 		this.getProfilePhone().clear();
-//		this.getProfilePhone().sendKeys(Keys.CONTROL + "a" + Keys.DELETE);
 		this.getProfilePhone().sendKeys(phone);
 		
 		this.getProfileZipCode().clear();
-//		this.getProfileZipCode().sendKeys(Keys.CONTROL + "a" + Keys.DELETE);
 		this.getProfileZipCode().sendKeys(zipCode);
 		
 		this.getProfileCountry().selectByVisibleText(country);

@@ -5,7 +5,6 @@
     <classes>
       <class name="tests.MealItemTest">
         <methods>
-          <include name="addMealToChartTest"/>
           <include name="quit"/>
           <include name="addMealToFavorite"/>
           <include name="clearCart"/>

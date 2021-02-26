@@ -68,13 +68,13 @@ public abstract class BasicTest {
 	                                        
 	@AfterMethod
 	public void afterTest(ITestResult result) throws IOException {
-//		if (result.getStatus() == ITestResult.FAILURE) {
-//			File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-//			FileHandler.copy(scrFile, new File("screenshots"));
-//			System.out.println("Neuspesan Test");
-//		} else {
-//			System.out.println("Uspesan Test!");
-//		}
+		if (result.getStatus() == ITestResult.FAILURE) {
+			File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+			FileHandler.copy(scrFile, new File("screenshots"));
+			System.out.println("Unsuccessful Test");
+		} else {
+			System.out.println("Successful Test!");
+		}
 		driver.manage().deleteAllCookies();
 	}
 	
