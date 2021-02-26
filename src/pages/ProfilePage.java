@@ -5,15 +5,15 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ProfilePage extends BasicPage {
 	
-	protected JavascriptExecutor js;
-
-	public ProfilePage(WebDriver driver, WebDriverWait waiter) {
-		super(driver, waiter);
+	public ProfilePage(WebDriver driver, WebDriverWait waiter, JavascriptExecutor js) {
+		super(driver, waiter, js);
 	}
 
 	public WebElement getProfileFirsName() {
@@ -58,47 +58,61 @@ public class ProfilePage extends BasicPage {
 		return city;
 	}
 	
-	public void setProfileImage() {
-		WebElement uploadImage = this.driver.findElement(By.xpath("//*[contains(@class, \"upload\")]"));
-		js.executeScript("arguments[0].click();", uploadImage);
-		uploadImage.sendKeys("E:\\Projects\\YoMeals\\img\\John Doe.jpg");
+	public WebElement getSaveButton() {
+		return this.driver.findElement(By.name("btn_submit"));
+	}
+	
+	public WebElement getUploadImageButton() throws InterruptedException {
+		//Thread.sleep(2000);
+		return this.driver.findElement(By.xpath("//*[@id='profileInfo']/div/div[1]/div/a")); //Mora drugi lokator
+		
+	}
+	
+	public WebElement getPhotoInput() {
+		return this.driver.findElement(By.xpath("//*[@type='file']"));
+		
+	}
+	
+	public void uploadImg(String imgPath) throws InterruptedException {
+		js.executeScript("arguments[0].click();", getUploadImageButton());
+		this.getPhotoInput().sendKeys(imgPath);
 	}
 	
 	public void removeProfileImage() {
-		WebElement removeImage = this.driver.findElement(By.className("remove"));
+		WebElement removeImage = this.driver.findElement(By.xpath("//*[@title='Remove']"));
 		js.executeScript("arguments[0].click();", removeImage);
 	}
 	
-	public void changePersonalImformation (String firsName , String lastName , String email , String address , String phone , String zipCode , String country , String state , String city) {
-		this.getProfileFirsName().click();
-		this.getProfileFirsName().sendKeys(Keys.CONTROL + "a" + Keys.DELETE);
+	public void changePersonalImformation (String firsName , String lastName , String address , String phone , String zipCode , String country , String state , String city) throws InterruptedException {
+		this.getProfileFirsName().clear();
+//		this.getProfileFirsName().sendKeys(Keys.CONTROL + "a" + Keys.DELETE);
 		this.getProfileFirsName().sendKeys(firsName);
 		
-		this.getProfileLastName().click();
-		this.getProfileLastName().sendKeys(Keys.CONTROL + "a" + Keys.DELETE);
+		this.getProfileLastName().clear();
+//		this.getProfileLastName().sendKeys(Keys.CONTROL + "a" + Keys.DELETE);
 		this.getProfileLastName().sendKeys(lastName);
 		
-		this.getProfileEmail().click();
-		this.getProfileEmail().sendKeys(Keys.CONTROL + "a" + Keys.DELETE);
-		this.getProfileEmail().sendKeys(email);
 		
-		this.getProfileAddress().click();
-		this.getProfileAddress().sendKeys(Keys.CONTROL + "a" + Keys.DELETE);
+		this.getProfileAddress().clear();
+//		this.getProfileAddress().sendKeys(Keys.CONTROL + "a" + Keys.DELETE);
 		this.getProfileAddress().sendKeys(address);
 		
-		this.getProfilePhone().click();
-		this.getProfilePhone().sendKeys(Keys.CONTROL + "a" + Keys.DELETE);
+		
+		this.getProfilePhone().clear();
+//		this.getProfilePhone().sendKeys(Keys.CONTROL + "a" + Keys.DELETE);
 		this.getProfilePhone().sendKeys(phone);
 		
-		this.getProfileZipCode().click();
-		this.getProfileZipCode().sendKeys(Keys.CONTROL + "a" + Keys.DELETE);
+		this.getProfileZipCode().clear();
+//		this.getProfileZipCode().sendKeys(Keys.CONTROL + "a" + Keys.DELETE);
 		this.getProfileZipCode().sendKeys(zipCode);
 		
-		this.getProfileCountry().selectByValue(country);
+		this.getProfileCountry().selectByVisibleText(country);
+		Thread.sleep(1000);
+		this.getProfileState().selectByVisibleText(state);
 		
-		this.getProfileState().selectByValue(state);
+		this.getProfileCity().selectByVisibleText(city);
 		
-		this.getProfileCity().selectByValue(city);
+		this.getSaveButton().click();
 	}
 	
 }

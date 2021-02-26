@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,10 +10,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class MealPage extends BasicPage {
 
-	public MealPage(WebDriver driver, WebDriverWait waiter) {
-		super(driver, waiter);
-	}
 	
+	
+	public MealPage(WebDriver driver, WebDriverWait waiter, JavascriptExecutor js) {
+		super(driver, waiter, js);
+	}
+
 	public WebElement getMealPage() {
 		return this.driver.findElement(By.linkText("Meals"));
 	}
@@ -87,11 +90,15 @@ public class MealPage extends BasicPage {
 		return this.driver.findElement(By.xpath("//*[@title=\"Favorite\"]"));
 	}
 	
+	public WebElement addToCartButton() {
+		return driver.findElement(By.linkText("Add To Cart"));
+	}
+	
 	public void addMealToCart(String quantity) {
 		WebElement quan = this.driver.findElement(By.name("product_qty"));
 		quan.click();
 		quan.sendKeys(Keys.CONTROL + "a" + Keys.DELETE);
 		quan.sendKeys(quantity);
-		driver.findElement(By.linkText("Add To Cart"));
+		this.addToCartButton().click();
 	}
 }
